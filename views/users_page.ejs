@@ -23,7 +23,10 @@
                     <p class="text-gray-400 text-sm mb-4">
                         <%= val.email %>
                     </p>
-                    <a href="/delete/<%=val.id_%>" class="text-center text-blue-500 font-bold">Delete</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <a href="/delete/<%=val.id_%>" class="text-center text-blue-500 font-bold">Delete</a>
+                        <a href="/edit/<%=val.id_%>" class="text-center text-blue-500 font-bold">Edit Profile</a>
+                    </div>
                 </div>
                 <%}%>
                     <%})%>

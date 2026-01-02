@@ -54,19 +54,43 @@ app.get('/deleting', async function (req, res) {
         res.json({
             success: false,
             message: "Users not deleted"
-
         })
     }
 })
 
-app.get('/delete/:id', async function(req,res){
-    try{
+app.get('/delete/:id', async function (req, res) {
+    try {
         await Model.findOneAndDelete(req.params.id);
         res.redirect('/users');
-    } catch(err){
+    } catch (err) {
         res.send(err);
     }
 })
+
+app.get('/edit/:id', async function (req, res) {
+    try {
+        let profile = await Model.findById(req.params.id);
+        res.render('edit', { profile: profile })
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+
+app.post('/edit/:id', async function(req,res){
+
+    await Model.findByIdAndUpdate( req.params.id ,{
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        image: req.body.image,
+        confirm_password: req.body.confirm_password
+    });
+
+    res.redirect('/users');
+
+})
+
 
 app.listen(3000, () => {
     console.log("Server is started!");
